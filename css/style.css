@@ -1,0 +1,28 @@
+html{
+    scroll-behavior: smooth;
+}
+
+body{
+    font-family: "Poppins", sans-serif;
+}
+
+/* NAVBAR */
+
+.navbar{
+    background-color: white;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    text-decoration: none;
+
+}
+
+.nav-list{
+    text-decoration: none;
+}
+
+.nav-list li{
+    list-style: none;
+}
