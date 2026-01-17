@@ -1,169 +1,192 @@
-/* --------------------------------
-IMPORT
--fetchmenudata:fetch menu data from data source(API/JSON)
--rendermenu :renders menu items dynamically into the DOM
-------------------------------------*/
-
-
+/* =========================================================
+   IMPORTS
+   - fetchMenuData : Fetches menu data from data source (API / JSON)
+   - renderMenu   : Renders menu items dynamically into the DOM
+   ========================================================= */
 import { fetchMenuData } from "./dataService.js";
 import { renderMenu } from "./renderMenu.js";
 
-/*----------------------------
- GLOBAL STATE (SINGLE SOURCE OF TRUTH)
- ---------------------------------*/
+/* =========================================================
+   GLOBAL STATE (SINGLE SOURCE OF TRUTH)
+   ========================================================= */
+// Stores all menu items fetched from data source
+let menuItems = [];
 
-// stores all menu items fetched from data source
-let menuItems=[];
+// Tracks currently selected category
+let activeCategory = "all";
 
-// track currentaly selected category
-let activeCategory="all";
+// Shopping cart data (persisted using localStorage)
+//let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-// shopping cart data(persisted using localstorage)
-// lrt cart  JSON
+/* =========================================================
+   DOM ELEMENT REFERENCES
+   ========================================================= */
+// Menu items container
+const menuContainer = document.getElementById("menuContainer");
 
-
-/*-----------------------
- DOM ELEMENT REFERENCES
- ------------------------*/
-
-//  menu items container
-const menuContainer=document.getElementById("menuContainer");
-
-// category filter buttons
+// Category filter buttons
 const filterButtons = document.querySelectorAll(".filter-btn");
 
-// mobile navigation toggle button
+// Mobile navigation toggle button
 const mobileToggle = document.querySelector(".mobile-nav-toggle");
 
-// navigation link list
+// Navigation links list
 const navList = document.querySelector(".nav-list");
 
-// search input field
+// Search input field
 const searchInput = document.getElementById("searchInput");
 
+// Book table button in navbar
+const bookTableBtn = document.querySelector(".nav-actions .primary");
 
-/*---------------------------------------
- 1.MOBILE NAVIGATION TOGGLE
- -toggle mobile menu visibility
- -switches icon betwwen hamburger and close
- ----------------------------------*/
+// Book table modal elements
+const bookTableModal = document.getElementById("bookTableModal");
+const closeBookTable = document.getElementById("closeBookTable");
 
- mobileToggle.addEventListener("click",()=>{
-    // toggle navigation visibility
+// Order modal elements
+const orderModal = document.getElementById("orderModal");
+const closeOrder = document.getElementById("closeOrder");
+const orderItemName = document.getElementById("orderItemName");
+
+// Quantity controls
+const qtyInput = document.getElementById("orderQty");
+const incBtn = document.getElementById("increaseQty");
+const decBtn = document.getElementById("decreaseQty");
+
+// Cart count badge
+//const cartCountEl = document.getElementById("cartCount");
+
+// Add to cart button inside order modal
+//const addToCartBtn = document.querySelector("#orderModal .btn.primary");
+
+/* =========================================================
+   1. MOBILE NAVIGATION TOGGLE
+   - Toggles mobile menu visibility
+   - Switches icon between hamburger and close
+   ========================================================= */
+mobileToggle.addEventListener("click", () => {
+    // Toggle navigation visibility
     navList.classList.toggle("active");
 
-    // change icon state
+    // Change icon state
     const icon = mobileToggle.querySelector("i");
     icon.classList.toggle("fa-bars");
     icon.classList.toggle("fa-times");
- });
+});
 
-
- /*==============================
-  2. INITIALIZE MENU
-  - fetch menu data on page load
-  - render menu items
-  - triggers animations
-  ===========================*/
-
-  async function init(){
-    try{
-        // fetch menu data
+/* =========================================================
+   2. INITIALIZE MENU
+   - Fetches menu data on page load
+   - Renders menu items
+   - Triggers animations
+   ========================================================= */
+async function init() {
+    try {
+        // Fetch menu data
         menuItems = await fetchMenuData();
 
-        // render menu if data exists
-        if(menuItems.length){
-            renderMenu(menuItems,menuContainer);
+        // Render menu if data exists
+        if (menuItems.length) {
+            renderMenu(menuItems, menuContainer);
             animateCards();
         }
-    } catch(error){
-        // log error if fetch fails
-        console.error("failed to load menu",error);
+    } catch (error) {
+        // Log error if fetch fails
+        console.error("Failed to load menu", error);
     }
-  }
+}
 
-  /*====================================
-   3.SEARCH + CATEGORY FILTER (COMBINED LOGIC)
+/* =========================================================
+   3. SEARCH + CATEGORY FILTER (COMBINED LOGIC)
+   ========================================================= */
+function applyFilters() {
+    // Convert search text to lowercase
+    const searchTerm = searchInput.value.toLowerCase();
 
-   ======================================*/
+    // Filter menu items based on category & search term
+    const filteredItems = menuItems.filter(item => {
+        const matchesCategory =
+            activeCategory === "all" || item.category === activeCategory;
 
-   function applyFilters(){
-        // convert search text to lowercase
-        const searchTerm = searchInput.value.toLowerCase();
+        const matchesSearch =
+            item.name.toLowerCase().includes(searchTerm) ||
+            item.description.toLowerCase().includes(searchTerm);
 
-        // filter menu items based on category and search term
-        const filteredItems = menuItems.filter(item => {
-            const matchesCategory =
-                activeCategory === "all" || item.category === activeCategory;
+        return matchesCategory && matchesSearch;
+    });
 
-            const matchesCategory =
-                item.name.toLowerCase().includes(searchTerm) ||
-                item.description.toLowerCase().includes(searchTerm);
+    // Render filtered menu
+    renderMenu(filteredItems, menuContainer);
+    animateCards();
+}
 
-            return matchesCategory && matchesSearch;
+/* =========================================================
+   4. CATEGORY FILTER BUTTONS
+   ========================================================= */
+filterButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
 
+        // Remove active class from all buttons
+        filterButtons.forEach(b => b.classList.remove("active"));
 
-        });
+        // Add active class to clicked button
+        btn.classList.add("active");
 
-        // render filterd menu
-        renderMenu(filteredItems,menuContainer);
-        animateCards();
-   }
+        // Update selected category
+        activeCategory = btn.dataset.category;
 
-   /*=========================
-   4  CATEGORY FILTER BUTTONS
+        // Apply filters
+        applyFilters();
+    });
+});
 
-   =======================*/
+/* =========================================================
+   5. SEARCH INPUT HANDLER
+   ========================================================= */
+// Apply filters on every keystroke
+searchInput.addEventListener("input", applyFilters);
 
-   filterButtons.forEach(btn =>{
-        btn.addEventListener("click",()=>{
-
-            // remove active class from all buttons
-            filterButtons.forEach(b=>b.classList.remove("active"));
-
-            // add active class to clicked button
-            btn.classList.add("active");
-
-            // update selected category
-            activeCategory = btn.dataset.category;
-
-            // apply filters
-            applyFilters();
-        });
-   });
-
-
- /*=========================
- 5 SREACH INPUT HANDLER
-
-   =======================*/
-
-
-// apply filters on every keystroke
-searchInput.addEventListener("input",applyFilters);
-
-
-
- /*=========================
- 6 MENU CARD ANIMATION
- -adds staggerd fade-in effect
-
-=======================*/
-
-function animateCards(){
+/* =========================================================
+   MENU CARD ANIMATION
+   - Adds staggered fade-in effect
+   ========================================================= */
+function animateCards() {
     const cards = document.querySelectorAll(".menu-card");
 
-    cards.forEach((card,index)=>{
-        // reset animation
-        cards.classList.remove("fade-in");
+    cards.forEach((card, index) => {
+        // Reset animation
+        card.classList.remove("fade-in");
 
-        // apply animation with delay
+        // Apply animation with delay
+        setTimeout(() => {
+            card.classList.add("fade-in");
+        }, index * 100);
+    });
+}
 
-    })
-  }
+/* =========================================================
+   SMOOTH SCROLL FOR NAVIGATION LINKS
+   ========================================================= */
+document.querySelectorAll(".nav-link").forEach(anchor => {
+    anchor.addEventListener("click", function (e) {
+        e.preventDefault();
 
+        // Get target section
+        const target = document.querySelector(this.getAttribute("href"));
+        if (!target) return;
 
-  /* =========================================================
+        // Smooth scroll with offset for fixed header
+        window.scrollTo({
+            top: target.offsetTop - 80,
+            behavior: "smooth"
+        });
+
+        // Close mobile menu after navigation
+        navList.classList.remove("active");
+    });
+});
+
+/* =========================================================
    DOM CONTENT LOADED
    ========================================================= */
 // Initialize application once DOM is ready
