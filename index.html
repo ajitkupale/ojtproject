@@ -54,9 +54,11 @@
 
             <div class="hero-content container">
                 <span class="hero-badge">Est. 2026</span>
-                <h1 class="hero-title">Authentic Flavors, <br>Fresh Ingredients</h1>
+                <h1 class="hero-title">
+                    Asli Maharashtrian Taste | Veg & Non-Veg
+                </h1>
                 <p class="hero-subtitle">
-                    Experience culinary excellence crafted with passion in the heart of Mumbai.
+                    Traditional Maharashtrian taste, made with care..
                 </p>
 
                 <!-- Hero buttons -->
@@ -74,7 +76,7 @@
 
                     <!-- About image -->
                     <div class="about-image-wrapper">
-                        <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=800&q=80"
+                        <img src="asset-images/hotel.jpeg"
                              alt="Exquisite Dish"
                              class="main-img">
 
@@ -90,7 +92,7 @@
                         <span class="sub-heading">Fine Dining Experience</span>
                         <h2 class="section-title">Our Culinary Journey</h2>
                         <p>
-                            Delicious Bites is dedicated to serving fresh, hygienic, and flavorful dishes made from quality ingredients.
+                           luxury restaurant style
                         </p>
                         <p>
                             Located in the heart of Mumbai, we pride ourselves on exceptional service and a warm atmosphere.
@@ -139,9 +141,7 @@
             </div>
         </section>
 
-    
-
-    <!-- ================= FOOTER ================= -->
+           <!-- ================= FOOTER ================= -->
     <footer class="footer">
         <div class="container footer-grid">
 
@@ -184,6 +184,70 @@
             </div>
         </div>
     </footer>
+
+
+  <!-- Bolok a table modal -->
+<section>
+    <div class="modal" id="bookTableModal">
+        <div class="modal-content">
+
+            <!-- close modal -->
+            <button class="modal-close" id="closeBookTable">&times;</button>
+
+                <h2>Book a Table</h2>
+
+                <!--  Booking From -->
+                  <form class="booking-form">
+                    <input type="text" placeholder="Full Name" required />
+                    <input type="tel" placeholder="Mobile Number" required />
+                    <input type="date" required />
+                    <input type="time" required />
+
+                    <select required>
+                        <option value="">Guest</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>4</option>
+                        <option>6+</option>
+                    </select>
+
+                        <button type="submit" class="btn primary">Confirm Booking</button>
+                  </form>  
+
+        </div>
+    </div>
+</section>
+
+<!-- ================= ORDER MODAL ================= -->
+
+<div class="modal" id="orderModal">
+    <div class="modal-content order-modal">
+
+        <!-- close modal -->
+         <button class="modal-close" id="closeOrder">&times;</button>
+
+         <!-- selected items details -->
+          <h2 class="order-title" id="orderItemName"></h2>
+          <p class="order-price" id="orderItemPrice"></p>
+
+            <!-- quantity controls -->
+             <div class="quantity-control">
+                <button class="qty-btn" id="decreaseQty">-</button>
+                <input type="number" id="orderQty" value="1" min="1" />
+                <button class="qty-btn" id="increaseQty">+</button>
+            </div>
+
+            <!-- Add to cart -->
+            <button class="btn primary full-width">Add to Cart</button>
+        </div>
+    </div>
+
+
+    
+
+ 
+    
+
 
      <!-- JAVASCRIPT FILE -->
      <script type="module" src="js/script.js"></script>

@@ -5,92 +5,128 @@
 
     {
         "id":1,
-        "name":"Caesar Salad",
+        "name":"Kothimbir Vadi",
         "category":"Starter",
         "price":200,
-        "description":"Caesar salad is a fresh salad made with crisp lettuce, crunchy croutons, cheese, and a creamy, tangy dressing.",
-        "image":"/asset-images/caesar-salad.jpg"
+        "description":"Crisp, flavorful coriander fritters with a traditional Maharashtrian touch.",
+        "image":"/asset-images/Kothimbir_Vadi.webp"
     },
 
 
 
     {
         "id":2,
-        "name":"Garlic Bread",
+        "name":"Veg Cutlet",
         "category":"Starter",
         "price":200,
-        "description":"Garlic bread is a crispy baked bread topped with butter, garlic, and herbs, known for its rich aroma and savory taste.",
-        "image":"/asset-images/garlic-bread.jpg"
+        "description":"Crispy golden cutlets made with spiced mixed vegetables.",
+        "image":"/asset-images/Vegetable-Cutlet.jpg"
     },
 
 
 
     {
         "id":3,
-        "name":"Margherita Pizza",
-        "category":"Main",
+        "name":"Chicken Kolhapuri Sukka",
+        "category":"starter",
         "price":250,
-        "description":"classic chees pizza with fresh basil and mozzarella.",
-        "image":"/asset-images/margherita-pizza.jpg"
+        "description":"Spicy dry chicken tossed in rich Kolhapuri masala.",
+        "image":"/asset-images/chicken-sukka.jpg"
     },
 
 
 
     {
         "id":4,
-        "name":"White Sauce Pizza",
-        "category":"Main",
+        "name":"Fish Fry (Surmai / Pomfret)",
+        "category":"starter",
         "price":250,
-        "description":"White sauce pasta is a creamy pasta dish made with a rich milk-based sauce, vegetables, and seasonings, known for its smooth and comforting taste.",
-        "image":"/asset-images/white-sauce-pasta.jpg"
+        "description":"Crispy fried fish marinated with coastal spices.",
+        "image":"/asset-images/Fish-Fry.jpg"
     },
 
 
 
     {
         "id":5,
-        "name":"Veg Burger",
+        "name":"Pithla Bhakrir",
         "category":"Main",
-        "price":250,
-        "description":"A veg burger is a tasty sandwich made with a vegetable patty, fresh veggies, and sauces, served inside a soft bun.",
-        "image":"/asset-images/veg-burger.jpg"
+        "price":300,
+        "description":"Classic Maharashtrian gram-flour curry served with soft bhakri.",
+        "image":"/asset-images/Pithla-Bhakri.webp"
     },
 
 
     {
         "id":6,
-        "name":"Grilled Sandwich",
+        "name":"Bharli Vangi",
         "category":"Main",
-        "price":250,
-        "description":"A grilled sandwich is a toasted sandwich with a crispy outside and a warm, flavorful filling inside, made by grilling bread with vegetables, cheese, or spreads.",
-        "image":"/asset-images/grilled-sandwich.jpg"
+        "price":300,
+        "description":"Baby brinjals stuffed with aromatic Maharashtrian spices.",
+        "image":"/asset-images/Bharli-Vangi.webp"
     },
 
     
 
     {
         "id":7,
-        "name":"Tiramisu",
-        "category":"Dessert",
-        "price":150,
-        "description":"Tiramisu is a classic Italian dessert made with layers of coffee-soaked biscuits, creamy mascarpone, and cocoa powder, known for its rich and smooth taste.",
-        "image":"/asset-images/tiramisu.jpg"
+        "name":"Chicken Kolhapuri",
+        "category":"main",
+        "price":300,
+        "description":"Fiery chicken curry cooked in bold Kolhapuri masala.",
+        "image":"/asset-images/kolhapuri_chicken.webp"
     },
 
 
 
     {
         "id":8,
-        "name":"Chocalate Browin",
-        "category":"Dessert",
-        "price":150,
-        "description":"Chocolate brownie is a rich, soft baked dessert made with chocolate and cocoa, known for its dense, fudgy texture and sweet taste.",
-        "image":"/asset-images/chocolate-browin.jpg"
-    }
+        "name":"Fish Curry",
+        "category":"main",
+        "price":300,
+        "description":"Traditional coastal fish cooked in a flavorful spiced gravy.",
+        "image":"/asset-images/fish-curry.webp"
+    },
  
 
+     {
+        "id":9,
+        "name":"Puran Poli",
+        "category":"Dessert",
+        "price":150,
+        "description":"Soft sweet flatbread stuffed with lentils and jaggery.",
+        "image":"/asset-images/Puran-Poli.webp"
+    },
 
-    
+     {
+        "id":10,
+        "name":"Modak",
+        "category":"Dessert",
+        "price":150,
+        "description":"Steamed dumplings filled with sweet coconut and jaggery.",
+        "image":"/asset-images/Modak.webp"
+    },
+
+
+     {
+        "id":11,
+        "name":"Solkadhi",
+        "category":"Dessert",
+        "price":150,
+        "description":"Refreshing coconut milk drink infused with kokum and spices.",
+        "image":"/asset-images/Solkadhi.webp"
+    },
+
+     {
+        "id":12,
+        "name":"Masala Chaas",
+        "category":"Dessert",
+        "price":150,
+        "description":"Chilled spiced buttermilk, light and refreshing.",
+        "image":"/asset-images/masala-chaas.jpg"
+    }
+
+     
 
 
 
