@@ -22,7 +22,7 @@
     --dark: #1f1f1f;
 
     /* Border color */
-    --border-color: #ffe0b2;
+    --border-color:#ADD8E6;
 
     /* Shadows for depth */
     --shadow-sm: 0 4px 12px rgba(0,0,0,0.06);
@@ -521,7 +521,7 @@ h3 {
    /* Individual filter button */
 .filter-btn {
     padding: 10px 24px;
-    border: 1px solid #e5e5e5;
+    border: 1.5px solid #2980B9;
     background: var(--white);
     cursor: pointer;
     transition: var(--transition);
@@ -565,7 +565,7 @@ h3 {
 
 /* Individual menu item card */
 .menu-card {
-    border: 1px solid var(--white);
+    border: 2px solid #666666;
     border-radius: 16px;
     overflow: hidden;
     box-shadow: var(--shadow-sm);
