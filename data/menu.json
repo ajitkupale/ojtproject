@@ -9,7 +9,7 @@
         "category":"Starter",
         "price":200,
         "description":"Crisp, flavorful coriander fritters with a traditional Maharashtrian touch.",
-        "image":"/asset-images/Kothimbir_Vadi.webp"
+        "image":"asset-images/Kothimbir_Vadi.webp"
     },
 
 
@@ -20,7 +20,7 @@
         "category":"Starter",
         "price":200,
         "description":"Crispy golden cutlets made with spiced mixed vegetables.",
-        "image":"/asset-images/Vegetable-Cutlet.jpg"
+        "image":"asset-images/Vegetable-Cutlet.jpg"
     },
 
 
@@ -31,7 +31,7 @@
         "category":"starter",
         "price":250,
         "description":"Spicy dry chicken tossed in rich Kolhapuri masala.",
-        "image":"/asset-images/chicken-sukka.jpg"
+        "image":"asset-images/chicken-sukka.jpg"
     },
 
 
@@ -42,7 +42,7 @@
         "category":"starter",
         "price":250,
         "description":"Crispy fried fish marinated with coastal spices.",
-        "image":"/asset-images/Fish-Fry.jpg"
+        "image":"asset-images/Fish-Fry.jpg"
     },
 
 
@@ -53,7 +53,7 @@
         "category":"Main",
         "price":300,
         "description":"Classic Maharashtrian gram-flour curry served with soft bhakri.",
-        "image":"/asset-images/Pithla-Bhakri.webp"
+        "image":"asset-images/Pithla-Bhakri.webp"
     },
 
 
@@ -63,7 +63,7 @@
         "category":"Main",
         "price":300,
         "description":"Baby brinjals stuffed with aromatic Maharashtrian spices.",
-        "image":"/asset-images/Bharli-Vangi.webp"
+        "image":"asset-images/Bharli-Vangi.webp"
     },
 
     
@@ -74,7 +74,7 @@
         "category":"main",
         "price":300,
         "description":"Fiery chicken curry cooked in bold Kolhapuri masala.",
-        "image":"/asset-images/kolhapuri_chicken.webp"
+        "image":"asset-images/kolhapuri_chicken.webp"
     },
 
 
@@ -85,7 +85,7 @@
         "category":"main",
         "price":300,
         "description":"Traditional coastal fish cooked in a flavorful spiced gravy.",
-        "image":"/asset-images/fish-curry.webp"
+        "image":"asset-images/fish-curry.webp"
     },
  
 
@@ -95,7 +95,7 @@
         "category":"Dessert",
         "price":150,
         "description":"Soft sweet flatbread stuffed with lentils and jaggery.",
-        "image":"/asset-images/Puran-Poli.webp"
+        "image":"asset-images/Puran-Poli.webp"
     },
 
      {
@@ -104,7 +104,7 @@
         "category":"Dessert",
         "price":150,
         "description":"Steamed dumplings filled with sweet coconut and jaggery.",
-        "image":"/asset-images/Modak.webp"
+        "image":"asset-images/Modak.webp"
     },
 
 
@@ -114,7 +114,7 @@
         "category":"Dessert",
         "price":150,
         "description":"Refreshing coconut milk drink infused with kokum and spices.",
-        "image":"/asset-images/Solkadhi.webp"
+        "image":"asset-images/Solkadhi.webp"
     },
 
      {
@@ -123,7 +123,7 @@
         "category":"Dessert",
         "price":150,
         "description":"Chilled spiced buttermilk, light and refreshing.",
-        "image":"/asset-images/masala-chaas.jpg"
+        "image":"asset-images/masala-chaas.jpg"
     }
 
      
