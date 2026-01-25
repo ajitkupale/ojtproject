@@ -1,0 +1,3 @@
+- [x] Add event listener for #closeDesignerModal to close the modal and set localStorage
+- [x] Add window click event listener to close modal when clicking outside
+- [x] Test the modal close functionality

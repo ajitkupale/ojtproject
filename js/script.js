@@ -15,8 +15,21 @@ let menuItems = [];
 // Tracks currently selected category
 let activeCategory = "all";
 
+// Price of the currently selected item in order modal
+let currentItemPrice = 0; 
+
+// Tracks if order modal was closed manually
+ let isManualScroll = false;
+
 // Shopping cart data (persisted using localStorage)
 //let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+// MOBILE SAFETY: Disable reveal animations on small screens
+if (window.innerWidth <= 768) {
+  document.querySelectorAll(".reveal").forEach(el => {
+    el.classList.add("reveal-active");
+  });
+}
 
 /* =========================================================
    DOM ELEMENT REFERENCES
@@ -47,11 +60,20 @@ const closeBookTable = document.getElementById("closeBookTable");
 const orderModal = document.getElementById("orderModal");
 const closeOrder = document.getElementById("closeOrder");
 const orderItemName = document.getElementById("orderItemName");
+const orderItemPrice = document.getElementById("orderItemPrice");
 
 // Quantity controls
 const qtyInput = document.getElementById("orderQty");
 const incBtn = document.getElementById("increaseQty");
 const decBtn = document.getElementById("decreaseQty");
+
+// Active navbar section-wise
+const sections = document.querySelectorAll("section[id]");
+const navLinks = document.querySelectorAll(".nav-link");
+
+// Designer modal elements
+const designerModal = document.getElementById("designerModal");
+const closeDesignerModal = document.getElementById("closeDesignerModal");
 
 // Cart count badge
 //const cartCountEl = document.getElementById("cartCount");
@@ -191,62 +213,162 @@ document.querySelectorAll(".nav-link").forEach(anchor => {
    ========================================================= */
 bookTableBtn.addEventListener("click", (e) => {
   e.preventDefault();
-  bookTableModal.style.display = "flex";
+//   bookTableModal.style.display = "flex";
+    bookTableModal.classList.add("active");
 });
 
 // Close book table modal
 closeBookTable.addEventListener("click", () => {
-  bookTableModal.style.display = "none";
+//   bookTableModal.style.display = "none";
+    bookTableModal.classList.remove("active");
 });
 
 // Close modal when clicking outside content
 window.addEventListener("click", (e) => {
   if (e.target === bookTableModal) {
-    bookTableModal.style.display = "none";
+    // bookTableModal.style.display = "none";
+    bookTableModal.classList.remove("active");
   }
 });
 
 /* =========================================================
    ORDER MODAL HANDLERS
    ========================================================= */
-// Close order modal
 
-closeOrder.addEventListener("click", () => {
-    orderModal.style.display = "none";
-});
-
-// Increase quantity
-incBtn.addEventListener("click", () => {
-  qtyInput.value = +qtyInput.value + 1;
-});
-
-// Decrease quantity (minimum 1)
-decBtn.addEventListener("click", () => {
-  if (qtyInput.value > 1) {
-    qtyInput.value = +qtyInput.value - 1;
-  }
-});
-
-//open order model when "add to order button is clicked"
-
-document.addEventListener("click", (e) => {
+//    Open order modal
+   document.addEventListener("click", (e) => {
   const btn = e.target.closest(".add-to-order");
   if (!btn) return;
 
-  // Set selected item details
+  currentItemPrice = Number(btn.dataset.price);
+
   orderItemName.textContent = btn.dataset.name;
-  orderItemPrice.textContent = `₹${btn.dataset.price}`;
+//   orderItemPrice.textContent = ₹${btn.dataset.price};
   qtyInput.value = 1;
 
-  // Show order modal
-  orderModal.style.display = "flex";
+  orderItemPrice.textContent = `₹${currentItemPrice}`;
+
+  //orderModal.style.display = "flex";
+  orderModal.classList.add("active");
+
 });
+
+// Close order modal
+
+closeOrder.addEventListener("click", () => {
+// orderModal.style.display = "none";
+  orderModal.classList.remove("active");
+});
+
+window.addEventListener("click", (e) => {
+  if (e.target === orderModal) {
+    orderModal.classList.remove("active");
+  }
+});
+
+    /* helper function for ordr modal */
+    function updateTotalPrice() {
+      const quantity = Number(qtyInput.value);
+      const totalPrice = currentItemPrice * quantity;
+      orderItemPrice.textContent = `₹${totalPrice}`;
+    }
+
+    incBtn.addEventListener("click",() => {
+        qtyInput.value = +qtyInput.value + 1;
+        updateTotalPrice();
+    });
+
+    decBtn.addEventListener("click",() => {
+      if (qtyInput.value > 1) {
+        qtyInput.value = +qtyInput.value - 1;
+        updateTotalPrice();
+      }
+
+
+
+
+    });
+
+/* =========================================================
+   DESIGNER MODAL HANDLERS
+   ========================================================= */
+// Close designer modal
+closeDesignerModal.addEventListener("click", () => {
+  designerModal.classList.remove("active");
+  localStorage.setItem("designerIntroSeen", "true");
+});
+
+// Close modal when clicking outside content
+window.addEventListener("click", (e) => {
+  if (e.target === designerModal) {
+    designerModal.classList.remove("active");
+    localStorage.setItem("designerIntroSeen", "true");
+  }
+});
+
+/* =========================================================
+   SCROLL REVEAL ANIMATION
+   ========================================================= */
+const revealObserver = new IntersectionObserver(
+  entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("reveal-active");
+      }
+    });
+  },
+  { threshold: 0.2 }
+);
+
+document.querySelectorAll(".reveal").forEach(section => {
+  revealObserver.observe(section);
+});
+
+
+/* =========================================================
+   ACTIVE NAV LINK ON SCROLL
+   ========================================================= */
+// const sections = document.querySelectorAll("section[id]");
+// const navLinks = document.querySelectorAll(".nav-link");
+
+const navObserver = new IntersectionObserver(entries => {
+  if (isManualScroll) return;
+
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(link => {
+        link.classList.remove("active");
+
+        if (link.getAttribute("href") === `#${entry.target.id}`) {
+          link.classList.add("active");
+        }
+      });
+    }
+  });
+}, {
+  rootMargin: "-90px 0px -60% 0px",
+  threshold: 0
+});
+
+sections.forEach(section => navObserver.observe(section));
+
+
 
 
 /* =========================================================
    DOM CONTENT LOADED
    ========================================================= */
 // Initialize application once DOM is ready
-document.addEventListener("DOMContentLoaded", init);
+document.addEventListener("DOMContentLoaded", () => {
 
+  //show designer intro modal only once
+  const hasVisited = localStorage.getItem("designerIntroSeen");
 
+  if (!hasVisited) {
+    //designerModal.style.display = "flex";
+    designerModal.classList.add("active");
+   // localStorage.setItem("designerIntroSeen", "true");
+  }
+
+  init();//Initialize menu and filters
+});
