@@ -31,6 +31,12 @@
             <!-- Desktop actions -->
             <div class="nav-actions">
 
+                <!-- Cart icon with count -->
+                <div class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cartCount" class="cart-count">0</span>
+                </div>
+
                 <!-- Book table button -->
                 <a href="#contact" class="btn btn-sm primary">Book a Table</a>
 
@@ -70,7 +76,7 @@
         </section>
 
         <!-- ================= ABOUT SECTION ================= -->
-        <section id="about" class="section about reveal">
+        <section id="about" class="section about">
             <div class="container">
                 <div class="about-grid">
 
@@ -97,7 +103,7 @@
                         <p>
                              Located within our hotel in the heart of Maharashtra, we offer gracious hospitality, exquisite dining, and a serene, elegant ambiance.
                              Discover our signature offerings <i class="fas fa-arrow-right"></i>
-                        </a>
+                        </p>
                     </div>
 
                 </div>
@@ -106,7 +112,7 @@
   </main>
 
       <!-- ================= MENU SECTION ================= -->
-        <section id="menu" class="section-light reveal">
+        <section id="menu" class="section-light">
             <div class="container">
 
                 <!-- Section header -->
@@ -140,7 +146,7 @@
         </section>
 
            <!-- ================= FOOTER ================= -->
-    <footer class="footer reveal">
+    <footer class="footer">
         <div class="container footer-grid ">
 
             <!-- Brand info -->
@@ -239,6 +245,31 @@
             <button class="btn primary full-width">Add to Cart</button>
         </div>
     </div>
+
+<!-- ================= CART MODAL ================= -->
+
+<div class="modal" id="cartModal">
+    <div class="modal-content cart-modal">
+
+        <!-- close modal -->
+        <button class="modal-close" id="closeCart">&times;</button>
+
+        <!-- cart title -->
+        <h2 class="cart-title">Your Cart</h2>
+
+        <!-- cart items container -->
+        <div class="cart-items" id="cartItems"></div>
+
+        <!-- cart total -->
+        <div class="cart-total">
+            <span>Total: </span>
+            <span id="cartTotal">₹0</span>
+        </div>
+
+        <!-- checkout button -->
+        <button class="btn primary full-width" id="checkoutBtn">Proceed to Checkout</button>
+    </div>
+</div>
 
 
 

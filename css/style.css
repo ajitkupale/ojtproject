@@ -5,33 +5,36 @@
    ========================================================= */
 :root {
     /* Primary brand colors */
-    --primary: #8A9A5B;
-    --primary-light: #ffb74d;
-    --secondary: #d99b49;
+    --primary: #c0b283; 
+    --primary-light: #dcd0c0; 
+    --secondary: #373737; 
+    --wow: #d4af37; 
+    --wow-secondary: #e0c56e; 
 
     /* Text colors */
-    --text-main: #333333;
-    --text-light: #555555;
+    --text-main: #f5f5f5; 
+    --text-light: #cccccc; 
 
     /* Background colors */
-    --bg-light: #FFFDD0;
-    --bg-section: #f7f7f7;
+    --bg-light: #2c2c2c; 
+    --bg-section: #1e1e1e; 
+    --bg-gradient:  linear-gradient(170deg, #1D2B4A 0%, #121828 50%, #0F121C 100%); 
 
     /* Neutral colors */
     --white: #ffffff;
-    --dark: #1f1f1f;
+    --dark: #ffffff; 
 
     /* Border color */
-    --border-color:#ADD8E6;
+    --border-color: #444444; 
 
     /* Shadows for depth */
-    --shadow-sm: 0 4px 12px rgba(0,0,0,0.06);
-    --shadow-md: 0 12px 30px rgba(0,0,0,0.12);
+    --shadow-sm: 0 4px 12px rgba(0,0,0,0.1);
+    --shadow-md: 0 12px 30px rgba(0,0,0,0.2);
 
     /* Accent helpers */
     --accent-strong: var(--primary);
     --accent-soft: var(--secondary);
-    --accent-muted: rgba(255, 152, 0, 0.15);
+    --accent-muted: rgba(212, 175, 55, 0.15); 
 
     /* Animation & layout helpers */
     --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
@@ -59,7 +62,8 @@ body {
     font-family: "Poppins", sans-serif;
     color: var(--text-main);
     line-height: 1.7;
-    background-color: var(--bg-light);
+    background: var(--bg-gradient);
+    background-attachment: fixed;
 }
 
 html, body {
@@ -97,15 +101,16 @@ a {
 
 /* Fixed navigation bar with glass effect */
 .navbar {
-    background: rgba(255,255,255,0.92);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(15px);
+    background: rgba(12, 12, 12, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     padding: 1.2rem 0;
     position: fixed;
     width: 100%;
     top: 0;
     z-index: 1000;
     transition: var(--transition);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Navbar layout */
@@ -120,11 +125,12 @@ a {
     font-size: 2rem;
     font-family: 'Times New Roman', Times, serif;
     font-weight: 800;
+    color: var(--text-main);
 }
 
 /* Highlight part of logo */
 .logo span {
-    color: var(--primary);
+    color: var(--wow);
 }
 
 /* Navigation list layout */
@@ -152,7 +158,7 @@ a {
     left: 0;
     width: 0;
     height: 2px;
-    background: var(--primary);
+    background: var(--wow);
     transition: var(--transition);
 }
 
@@ -163,12 +169,12 @@ a {
 
 /* Change text color on hover */
 .nav-link:hover {
-    color: var(--primary);
+    color: var(--wow);
 }
 
 /* active link style */
 .nav-link.active {
-    color: var(--primary);
+    color: var(--wow);
 }
 
 .nav-link.active::after {
@@ -221,7 +227,7 @@ h3 {
 
 /* Small uppercase subtitle */
 .sub-heading {
-    color: var(--primary);
+    color: var(--wow);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -246,7 +252,7 @@ h3 {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+    background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
                        url("https://kuppannaaustin.com/wp-content/uploads/2025/09/Best-Indian-Non-Veg-Restaurant_Kuppanna-Austin.png");
     background-position: center;
     background-size: cover;
@@ -274,10 +280,10 @@ h3 {
 
 /* Small highlighted badge shown above hero heading */
 .hero-badge {
-    background: var(--accent-soft); /* soft accent background */
-    color: var(--dark);             /* dark text for contrast */
+    background: var(--accent-soft);
+    color: var(--dark);             
     padding: 6px 16px;
-    border-radius: 50px;            /* pill shape */
+    border-radius: 50px;           
     font-size: 0.75rem;
     font-weight: 600;
     margin-bottom: 1.5rem;
@@ -298,11 +304,11 @@ h3 {
 /* Hero description text */
 .hero-subtitle {
     font-size: 1.1rem;
-    max-width: 700px;               /* limits text width for readability */
+    max-width: 700px;              
     margin: 0 auto 2.5rem;
     opacity: 0.85;   
     font-weight: 400;
-    letter-spacing: 0.02em;               /* slightly muted text */
+    letter-spacing: 0.02em;               
 }
 
 /* hero animation */
@@ -361,27 +367,30 @@ h3 {
 
 /* Primary filled button */
 .btn.primary {
-    background: #8A9A5B;
+    background: var(--wow);
     color: var(--white);
+    border: 2px solid var(--wow);
 }
 
 /* Hover effect for primary button */
 .btn.primary:hover {
-    background: #8A9A5B;
+    background: var(--wow-secondary);
+    border-color: var(--wow-secondary);
     transform: translateY(-3px);    /* subtle lift effect */
-    box-shadow: 0 10px 20px rgba(255, 152, 0, 0.3);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
 }
 
 /* Outline style button */
 .btn.outline {
-    border: 2px solid var(--white);
-    color: var(--white);
+    border: 2px solid var(--wow);
+    color: var(--wow);
+    background: transparent;
 }
 
 /* Hover effect for outline button */
 .btn.outline:hover {
-    background: var(--white);
-    color: var(--dark);
+    background: var(--wow);
+    color: var(--white);
 }
 
 /* Smaller button variant */
@@ -493,7 +502,9 @@ h3 {
     width: 100%;
     padding: 14px 18px;
     border-radius: 50px;
-    border: 1px solid #e0e0e0;
+    border: 1px solid var(--border-color);
+    background: var(--bg-light);
+    color: var(--text-main);
     font-size: 0.95rem;
     outline: none;
     transition: var(--transition);
@@ -501,8 +512,8 @@ h3 {
 
 /* Search input focus state */
 .menu-search input:focus {
-    border-color: var(--primary);
-     box-shadow: 0 0 0 3px rgba(255, 152, 0, 0.15);
+    border-color: var(--wow);
+     box-shadow: 0 0 0 3px rgba(106, 13, 173, 0.15);
 }
 
 /* =========================================================
@@ -521,8 +532,9 @@ h3 {
    /* Individual filter button */
 .filter-btn {
     padding: 10px 24px;
-    border: 1.5px solid #2980B9;
-    background: var(--white);
+    border: 1.5px solid var(--wow);
+    background: transparent;
+    color: var(--text-main);
     cursor: pointer;
     transition: var(--transition);
     font-weight: 500;
@@ -532,16 +544,16 @@ h3 {
 /* hover state for filter */
 
 .filter-btn:hover {
-    background: var(--accent-muted);
-    color: var(--primary);
+    background: var(--wow);
+    color: var(--white);
 }
 
 /* active filtet button */
 
 .filter-btn.active {
-    background: var(--primary);
+    background: var(--wow);
     color: var(--white);
-    border-color: var(--primary);
+    border-color: var(--wow);
 }
 
 
@@ -565,7 +577,7 @@ h3 {
 
 /* Individual menu item card */
 .menu-card {
-    border: 2px solid #666666;
+    background: var(--bg-section);
     border-radius: 16px;
     overflow: hidden;
     box-shadow: var(--shadow-sm);
@@ -573,6 +585,16 @@ h3 {
     position: relative;
     opacity: 0;
     transform: translateY(30px);
+    border: 3px solid transparent;
+    border-image: linear-gradient(to bottom, var(--wow), transparent);
+    border-image-slice: 1;
+    border-left-width: 5px;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    background-image: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.05), transparent);
+    background-size: 200% 100%;
+    background-position: 200% 0;
 }
 
 /* Card fade-in animation triggered by JS */
@@ -585,7 +607,19 @@ h3 {
 .menu-card:hover {
     transform: translateY(-10px);
     box-shadow: var(--shadow-md);
+    animation: cardShine 0.8s ease forwards;
 }
+
+/* Shine animation for menu card */
+@keyframes cardShine {
+    from {
+        background-position: 200% 0;
+    }
+    to {
+        background-position: -200% 0;
+    }
+}
+
 
 /* =========================================================
    MENU IMAGE
@@ -683,7 +717,8 @@ i {
 
 /* Modal content box */
 .modal-content {
-  background: var(--white);
+  background: var(--bg-section);
+  color: var(--text-main);
   padding: 2rem;
   width: 90%;
   max-width: 420px;
@@ -734,7 +769,9 @@ select:focus {
 .booking-form input,
 .booking-form select {
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #444;
+  background: #2a2a2a;
+  color: var(--text-main);
 }
 
 /* =========================================================
@@ -784,7 +821,9 @@ select:focus {
   text-align: center;
   padding: 8px;
   font-size: 1rem;
-  border: 1px solid #ccc;
+  border: 1px solid #444;
+  background: #2a2a2a;
+  color: var(--text-main);
   border-radius: 6px;
 }
 
@@ -794,7 +833,7 @@ select:focus {
   height: 36px;
   border-radius: 50%;
   border: none;
-  background: var(--primary);
+  background: var(--wow);
   color: #fff;
   font-size: 18px;
   cursor: pointer;
@@ -816,6 +855,32 @@ select:focus {
     transform: scale(0.9);
   }
   to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Button rotate animation */
+@keyframes buttonRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Fade attractive animation */
+@keyframes fadeAttractive {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+  100% {
     opacity: 1;
     transform: scale(1);
   }
@@ -885,8 +950,8 @@ select:focus {
 
 /* Footer background and spacing */
 .footer {
-    background: #181818;
-    color: #a8a8a8;
+    background: var(--bg-section);
+    color: var(--text-light);
     padding: 80px 0 0;
 }
 
@@ -900,15 +965,13 @@ select:focus {
 
 /* Footer section headings */
 .footer h4 {
-    color: #ffffff;
+    color: var(--wow);
     margin-bottom: 1.5rem;
     font-family: 'Inter', sans-serif;
     font-size: 1.1rem;
 }
 
-.footer h2 {
-    color: var(--bg-light);
-}
+
 
 /* Footer links */
 .footer-links a {
@@ -919,20 +982,20 @@ select:focus {
 
 /* Footer link hover effect */
 .footer-links a:hover {
-    color: var(--primary);
+    color: var(--wow);
     padding-left: 5px;
 }
 
 /* Footer bottom copyright */
 .footer-bottom {
-    border-top: 1px solid #2d3436;  
+    border-top: 1px solid var(--border-color);  
     padding: 30px 0;
     text-align: center;
     font-size: 0.9rem;
 }
 
 .footer-contact a {
-    color: rgba(255, 0, 0, 0.544);
+    color: var(--wow);
     font-style: normal
 }
 /* =========================================================
@@ -947,8 +1010,100 @@ select:focus {
     top: 100%;
     left: 0;
     width: 100%;
-    background: white;
+    background: var(--bg-section);
     padding: 2rem;
     box-shadow: var(--shadow-md);
 }
 
+/* =========================================================
+   CART MODAL
+   ========================================================= */
+
+/* Cart modal content */
+.cart-modal {
+    text-align: center;
+    padding: 2.5rem 2rem;
+    border-radius: 12px;
+    max-width: 450px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+/* Cart title */
+.cart-title {
+    font-size: 1.6rem;
+    font-family: "Playfair Display", serif;
+    margin-bottom: 1.5rem;
+}
+
+/* Cart items container */
+.cart-items {
+    margin-bottom: 1.5rem;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+/* Individual cart item */
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+/* Cart item info */
+.cart-item-info {
+    text-align: left;
+    flex: 1;
+}
+
+.cart-item-info h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+    color: var(--text-main);
+}
+
+.cart-item-info p {
+    margin: 0;
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+/* Remove button */
+.remove-btn {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: var(--transition);
+}
+
+.remove-btn:hover {
+    background: #c82333;
+}
+
+/* Cart total */
+.cart-total {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    padding: 1rem 0;
+    border-top: 2px solid var(--border-color);
+}
+
+
+
+/* =========================================================
+   MEDIA QUERIES
+   - Responsive adjustments for different screen sizes
+   ========================================================= */
+   

@@ -22,10 +22,15 @@ let currentItemPrice = 0;
  let isManualScroll = false;
 
 // Shopping cart data (persisted using localStorage)
-//let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 // MOBILE SAFETY: Disable reveal animations on small screens
 if (window.innerWidth <= 768) {
+  document.querySelectorAll(".reveal").forEach(el => {
+    el.classList.add("reveal-active");
+  });
+} else {
+  // For desktop, add reveal-active to all reveal elements to show them immediately
   document.querySelectorAll(".reveal").forEach(el => {
     el.classList.add("reveal-active");
   });
@@ -76,10 +81,24 @@ const designerModal = document.getElementById("designerModal");
 const closeDesignerModal = document.getElementById("closeDesignerModal");
 
 // Cart count badge
-//const cartCountEl = document.getElementById("cartCount");
+const cartCountEl = document.getElementById("cartCount");
+
+// Cart modal elements
+const cartModal = document.getElementById("cartModal");
+const closeCart = document.getElementById("closeCart");
+const cartItemsEl = document.getElementById("cartItems");
+const cartTotalEl = document.getElementById("cartTotal");
+const checkoutBtn = document.getElementById("checkoutBtn");
+
+// Cart icon
+const cartIcon = document.querySelector(".cart-icon");
+
+/* =========================================================
+   ADD TO CART BUTTON
+   ========================================================= */
 
 // Add to cart button inside order modal
-//const addToCartBtn = document.querySelector("#orderModal .btn.primary");
+const addToCartBtn = document.querySelector("#orderModal .btn.primary");
 
 /* =========================================================
    1. MOBILE NAVIGATION TOGGLE
@@ -243,6 +262,7 @@ window.addEventListener("click", (e) => {
   currentItemPrice = Number(btn.dataset.price);
 
   orderItemName.textContent = btn.dataset.name;
+  orderItemName.dataset.id = btn.dataset.id; // Add item ID to modal
 //   orderItemPrice.textContent = ₹${btn.dataset.price};
   qtyInput.value = 1;
 
@@ -283,10 +303,16 @@ window.addEventListener("click", (e) => {
         qtyInput.value = +qtyInput.value - 1;
         updateTotalPrice();
       }
+    });
 
+    // Add to cart button event listener
+    addToCartBtn.addEventListener("click", () => {
+        const itemId = Number(orderItemName.dataset.id); // Assuming we add data-id to orderItemName
+        const name = orderItemName.textContent;
+        const price = currentItemPrice;
+        const quantity = Number(qtyInput.value);
 
-
-
+        addToCart(itemId, name, price, quantity);
     });
 
 /* =========================================================
@@ -356,6 +382,96 @@ sections.forEach(section => navObserver.observe(section));
 
 
 /* =========================================================
+   CART FUNCTIONALITY
+   ========================================================= */
+
+// Add item to cart
+function addToCart(itemId, name, price, quantity) {
+    // Check if item already exists in cart
+    const existingItem = cart.find(item => item.id === itemId);
+
+    if (existingItem) {
+        // Update quantity if item exists
+        existingItem.quantity += quantity;
+    } else {
+        // Add new item to cart
+        cart.push({
+            id: itemId,
+            name: name,
+            price: price,
+            quantity: quantity
+        });
+    }
+
+    // Save cart to localStorage
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    // Update cart count display
+    updateCartCount();
+
+    // Close order modal
+    orderModal.classList.remove("active");
+
+    // Optional: Show success message
+    alert(`${name} added to cart!`);
+}
+
+// Update cart count badge
+function updateCartCount() {
+    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    if (cartCountEl) {
+        cartCountEl.textContent = totalItems;
+        cartCountEl.style.display = totalItems > 0 ? "block" : "none";
+    }
+}
+
+// Render cart items in modal
+function renderCart() {
+    cartItemsEl.innerHTML = "";
+    let total = 0;
+
+    if (cart.length === 0) {
+        cartItemsEl.innerHTML = "<p>Your cart is empty.</p>";
+        cartTotalEl.textContent = "₹0";
+        return;
+    }
+
+    cart.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+
+        const itemEl = document.createElement("div");
+        itemEl.className = "cart-item";
+        itemEl.innerHTML = `
+            <div class="cart-item-info">
+                <h4>${item.name}</h4>
+                <p>₹${item.price} x ${item.quantity} = ₹${itemTotal}</p>
+            </div>
+            <button class="remove-btn" data-id="${item.id}">Remove</button>
+        `;
+        cartItemsEl.appendChild(itemEl);
+    });
+
+    cartTotalEl.textContent = `₹${total}`;
+
+    // Add event listeners to remove buttons
+    document.querySelectorAll(".remove-btn").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            const itemId = Number(e.target.dataset.id);
+            removeItem(itemId);
+        });
+    });
+}
+
+// Remove item from cart
+function removeItem(itemId) {
+    cart = cart.filter(item => item.id !== itemId);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCartCount();
+    renderCart();
+}
+
+/* =========================================================
    DOM CONTENT LOADED
    ========================================================= */
 // Initialize application once DOM is ready
@@ -369,6 +485,9 @@ document.addEventListener("DOMContentLoaded", () => {
     designerModal.classList.add("active");
    // localStorage.setItem("designerIntroSeen", "true");
   }
+
+  // Initialize cart count on load
+  updateCartCount();
 
   init();//Initialize menu and filters
 });
