@@ -450,7 +450,7 @@ h3 {
     position: absolute;
     bottom: 24px;
     left: 24px;
-    background: var(--primary-light);
+    background: var(--wow);
     color: var(--dark);
     padding: 1.4rem 1.6rem;
     border-radius: 14px;
